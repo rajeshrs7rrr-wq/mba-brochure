@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Six Pack Abs - Diet & Fitness Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: white;
+            color: #667eea;
+            border-color: white;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .item-list {
+            display: grid;
+            gap: 15px;
+        }
+
+        .item {
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .item-subtitle {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .progress-bar {
+            background: #ddd;
+            height: 25px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: width 0.3s ease;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .meal-type {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .exercise-intensity {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 8px;
+        }
+
+        .intensity-high {
+            background: #f5576c;
+            color: white;
+        }
+
+        .intensity-medium {
+            background: #ffa502;
+            color: white;
+        }
+
+        .intensity-low {
+            background: #4facfe;
+            color: white;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .nav-tabs {
+                flex-direction: column;
+            }
+
+            .tab-btn {
+                width: 100%;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .item-actions {
+                margin-top: 10px;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💪 Six Pack Abs Tracker</h1>
+            <p>Your Complete Diet & Fitness Companion</p>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="switchTab('dashboard')">📊 Dashboard</button>
+            <button class="tab-btn" onclick="switchTab('workouts')">🏋️ Workouts</button>
+            <button class="tab-btn" onclick="switchTab('meals')">🍽️ Meals</button>
+            <button class="tab-btn" onclick="switchTab('measurements')">📏 Measurements</button>
+            <button class="tab-btn" onclick="switchTab('progress')">📈 Progress</button>
+        </div>
+
+        <!-- Dashboard Tab -->
+        <div id="dashboard" class="tab-content active">
+            <div class="card">
+                <h2>📊 Today's Summary</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="todayCalories">0</div>
+                        <div class="stat-label">Calories Consumed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="todayProtein">0g</div>
+                        <div class="stat-label">Protein Intake</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="todayWorkouts">0</div>
+                        <div class="stat-label">Workouts Done</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="bodyFatPercent">--</div>
+                        <div class="stat-label">Body Fat %</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🎯 Weekly Goal Progress</h2>
+                <div style="margin-top: 20px;">
+                    <p><strong>Workout Goal: 5 sessions</strong></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="workoutProgress" style="width: 0%">0%</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <p><strong>Protein Goal: 150g per day</strong></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="proteinProgress" style="width: 0%">0%</div>
+                    </div>
+                </div>
+                <div style="margin-top: 20px;">
+                    <p><strong>Fat Loss Goal: 2 lbs per week</strong></p>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="fatLossProgress" style="width: 0%">0%</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Workouts Tab -->
+        <div id="workouts" class="tab-content">
+            <div class="card">
+                <h2>🏋️ Add Workout</h2>
+                <div class="form-group">
+                    <label>Exercise Name</label>
+                    <input type="text" id="exerciseName" placeholder="e.g., Crunches, Push-ups, Running">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Sets × Reps</label>
+                        <input type="text" id="setsReps" placeholder="e.g., 3x20">
+                    </div>
+                    <div class="form-group">
+                        <label>Duration (minutes)</label>
+                        <input type="number" id="duration" placeholder="30">
+                    </div>
+                    <div class="form-group">
+                        <label>Intensity</label>
+                        <select id="intensity">
+                            <option value="Low">Low</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Calories Burned</label>
+                    <input type="number" id="caloriesBurned" placeholder="250">
+                </div>
+                <button class="btn" onclick="addWorkout()">Add Workout</button>
+            </div>
+
+            <div class="card">
+                <h2>📋 Today's Workouts</h2>
+                <div id="workoutList" class="item-list">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🏃</div>
+                        <p>No workouts logged yet. Start your journey!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Meals Tab -->
+        <div id="meals" class="tab-content">
+            <div class="card">
+                <h2>🍽️ Add Meal</h2>
+                <div class="form-group">
+                    <label>Meal Name</label>
+                    <input type="text" id="mealName" placeholder="e.g., Grilled Chicken with Rice">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Meal Type</label>
+                        <select id="mealType">
+                            <option value="Breakfast">Breakfast</option>
+                            <option value="Lunch">Lunch</option>
+                            <option value="Dinner">Dinner</option>
+                            <option value="Snack">Snack</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Calories</label>
+                        <input type="number" id="mealCalories" placeholder="500">
+                    </div>
+                    <div class="form-group">
+                        <label>Protein (g)</label>
+                        <input type="number" id="mealProtein" placeholder="40">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Carbs (g)</label>
+                        <input type="number" id="mealCarbs" placeholder="50">
+                    </div>
+                    <div class="form-group">
+                        <label>Fat (g)</label>
+                        <input type="number" id="mealFat" placeholder="15">
+                    </div>
+                </div>
+                <button class="btn" onclick="addMeal()">Add Meal</button>
+            </div>
+
+            <div class="card">
+                <h2>🥗 Today's Meals</h2>
+                <div id="mealList" class="item-list">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">🍴</div>
+                        <p>No meals logged yet. Start tracking your nutrition!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📊 Macro Breakdown Today</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalProtein">0g</div>
+                        <div class="stat-label">Protein</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCarbs">0g</div>
+                        <div class="stat-label">Carbs</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalFat">0g</div>
+                        <div class="stat-label">Fat</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Measurements Tab -->
+        <div id="measurements" class="tab-content">
+            <div class="card">
+                <h2>📏 Record Measurements</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="date" id="measureDate">
+                    </div>
+                    <div class="form-group">
+                        <label>Weight (lbs)</label>
+                        <input type="number" id="weight" placeholder="180" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Body Fat %</label>
+                        <input type="number" id="bodyFat" placeholder="15" step="0.1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Chest (in)</label>
+                        <input type="number" id="chest" placeholder="40" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Waist (in)</label>
+                        <input type="number" id="waist" placeholder="32" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Abs (in)</label>
+                        <input type="number" id="abs" placeholder="28" step="0.1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Arms (in)</label>
+                        <input type="number" id="arms" placeholder="14" step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label>Thighs (in)</label>
+                        <input type="number" id="thighs" placeholder="24" step="0.1">
+                    </div>
+                </div>
+                <button class="btn" onclick="addMeasurement()">Save Measurements</button>
+            </div>
+
+            <div class="card">
+                <h2>📈 Measurement History</h2>
+                <div id="measurementList" class="item-list">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📏</div>
+                        <p>No measurements recorded yet. Start tracking your progress!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tab -->
+        <div id="progress" class="tab-content">
+            <div class="card">
+                <h2>📈 Six Pack Journey</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgWeight">--</div>
+                        <div class="stat-label">Current Weight</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="avgBodyFat">--</div>
+                        <div class="stat-label">Current Body Fat</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalWorkouts">0</div>
+                        <div class="stat-label">Total Workouts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="totalCaloriesBurned">0</div>
+                        <div class="stat-label">Calories Burned</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>💡 Six Pack Tips</h2>
+                <div style="margin-top: 20px;">
+                    <h3 style="color: #667eea; margin-bottom: 10px;">🎯 Keys to Success:</h3>
+                    <ul style="margin-left: 20px; line-height: 2;">
+                        <li><strong>Core Exercises:</strong> Crunches, planks, leg raises (3-4x per week)</li>
+                        <li><strong>Cardio:</strong> 3-4 cardio sessions per week (HIIT recommended)</li>
+                        <li><strong>Protein:</strong> Aim for 0.8-1g per pound of body weight</li>
+                        <li><strong>Calorie Deficit:</strong> 300-500 calories below maintenance</li>
+                        <li><strong>Sleep:</strong> 7-9 hours per night for recovery</li>
+                        <li><strong>Consistency:</strong> Stick with your plan for 12+ weeks</li>
+                        <li><strong>Hydration:</strong> Drink at least 3-4 liters of water daily</li>
+                        <li><strong>Avoid:</strong> Processed foods, excess sugar, and alcohol</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>🏆 Achievement Milestones</h2>
+                <div style="margin-top: 20px;">
+                    <p>✅ <strong>Week 4:</strong> First abs definition visible</p>
+                    <p>✅ <strong>Week 8:</strong> Clear four-pack showing</p>
+                    <p>✅ <strong>Week 12:</strong> Full six-pack visible</p>
+                    <p>✅ <strong>Week 16+:</strong> Shredded and defined</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize data from localStorage
+        let data = {
+            workouts: JSON.parse(localStorage.getItem('workouts')) || [],
+            meals: JSON.parse(localStorage.getItem('meals')) || [],
+            measurements: JSON.parse(localStorage.getItem('measurements')) || []
+        };
+
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Update displays
+            updateDashboard();
+            updateWorkoutDisplay();
+            updateMealDisplay();
+            updateMeasurementDisplay();
+        }
+
+        function addWorkout() {
+            const exercise = document.getElementById('exerciseName').value;
+            const setsReps = document.getElementById('setsReps').value;
+            const duration = document.getElementById('duration').value;
+            const intensity = document.getElementById('intensity').value;
+            const calories = document.getElementById('caloriesBurned').value;
+
+            if (exercise && setsReps && duration && calories) {
+                data.workouts.push({
+                    date: new Date().toISOString().split('T')[0],
+                    exercise,
+                    setsReps,
+                    duration,
+                    intensity,
+                    calories: parseInt(calories)
+                });
+
+                localStorage.setItem('workouts', JSON.stringify(data.workouts));
+
+                // Clear inputs
+                document.getElementById('exerciseName').value = '';
+                document.getElementById('setsReps').value = '';
+                document.getElementById('duration').value = '';
+                document.getElementById('caloriesBurned').value = '';
+
+                updateWorkoutDisplay();
+                updateDashboard();
+                alert('Workout added successfully! 💪');
+            } else {
+                alert('Please fill all fields!');
+            }
+        }
+
+        function addMeal() {
+            const name = document.getElementById('mealName').value;
+            const type = document.getElementById('mealType').value;
+            const calories = document.getElementById('mealCalories').value;
+            const protein = document.getElementById('mealProtein').value;
+            const carbs = document.getElementById('mealCarbs').value;
+            const fat = document.getElementById('mealFat').value;
+
+            if (name && calories && protein && carbs && fat) {
+                data.meals.push({
+                    date: new Date().toISOString().split('T')[0],
+                    name,
+                    type,
+                    calories: parseInt(calories),
+                    protein: parseInt(protein),
+                    carbs: parseInt(carbs),
+                    fat: parseInt(fat)
+                });
+
+                localStorage.setItem('meals', JSON.stringify(data.meals));
+
+                // Clear inputs
+                document.getElementById('mealName').value = '';
+                document.getElementById('mealCalories').value = '';
+                document.getElementById('mealProtein').value = '';
+                document.getElementById('mealCarbs').value = '';
+                document.getElementById('mealFat').value = '';
+
+                updateMealDisplay();
+                updateDashboard();
+                alert('Meal logged successfully! 🍽️');
+            } else {
+                alert('Please fill all fields!');
+            }
+        }
+
+        function addMeasurement() {
+            const date = document.getElementById('measureDate').value;
+            const weight = document.getElementById('weight').value;
+            const bodyFat = document.getElementById('bodyFat').value;
+            const chest = document.getElementById('chest').value;
+            const waist = document.getElementById('waist').value;
+            const abs = document.getElementById('abs').value;
+            const arms = document.getElementById('arms').value;
+            const thighs = document.getElementById('thighs').value;
+
+            if (date && weight && bodyFat) {
+                data.measurements.push({
+                    date,
+                    weight: parseFloat(weight),
+                    bodyFat: parseFloat(bodyFat),
+                    chest: parseFloat(chest),
+                    waist: parseFloat(waist),
+                    abs: parseFloat(abs),
+                    arms: parseFloat(arms),
+                    thighs: parseFloat(thighs)
+                });
+
+                localStorage.setItem('measurements', JSON.stringify(data.measurements));
+
+                // Clear inputs
+                document.getElementById('measureDate').value = '';
+                document.getElementById('weight').value = '';
+                document.getElementById('bodyFat').value = '';
+                document.getElementById('chest').value = '';
+                document.getElementById('waist').value = '';
+                document.getElementById('abs').value = '';
+                document.getElementById('arms').value = '';
+                document.getElementById('thighs').value = '';
+
+                updateMeasurementDisplay();
+                updateDashboard();
+                alert('Measurements saved successfully! 📏');
+            } else {
+                alert('Please fill required fields (date, weight, body fat)!');
+            }
+        }
+
+        function deleteWorkout(index) {
+            data.workouts.splice(index, 1);
+            localStorage.setItem('workouts', JSON.stringify(data.workouts));
+            updateWorkoutDisplay();
+            updateDashboard();
+        }
+
+        function deleteMeal(index) {
+            data.meals.splice(index, 1);
+            localStorage.setItem('meals', JSON.stringify(data.meals));
+            updateMealDisplay();
+            updateDashboard();
+        }
+
+        function deleteMeasurement(index) {
+            data.measurements.splice(index, 1);
+            localStorage.setItem('measurements', JSON.stringify(data.measurements));
+            updateMeasurementDisplay();
+            updateDashboard();
+        }
+
+        function updateWorkoutDisplay() {
+            const list = document.getElementById('workoutList');
+            const today = new Date().toISOString().split('T')[0];
+            const todayWorkouts = data.workouts.filter(w => w.date === today);
+
+            if (todayWorkouts.length === 0) {
+                list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🏃</div><p>No workouts logged yet.</p></div>';
+                return;
+            }
+
+            list.innerHTML = todayWorkouts.map((workout, index) => `
+                <div class="item">
+                    <div class="item-content">
+                        <div class="item-title">${workout.exercise}</div>
+                        <div class="item-subtitle">
+                            ${workout.setsReps} • ${workout.duration} min • 
+                            <span class="exercise-intensity intensity-${workout.intensity.toLowerCase()}">${workout.intensity}</span>
+                            • ${workout.calories} cal burned
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-small btn-danger" onclick="deleteWorkout(${data.workouts.indexOf(workout)})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateMealDisplay() {
+            const list = document.getElementById('mealList');
+            const today = new Date().toISOString().split('T')[0];
+            const todayMeals = data.meals.filter(m => m.date === today);
+
+            if (todayMeals.length === 0) {
+                list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">🍴</div><p>No meals logged yet.</p></div>';
+                return;
+            }
+
+            list.innerHTML = todayMeals.map((meal, index) => `
+                <div class="item">
+                    <div class="item-content">
+                        <div class="item-title">${meal.name}</div>
+                        <div class="item-subtitle">
+                            <span class="meal-type">${meal.type}</span>
+                            ${meal.calories}cal • P: ${meal.protein}g | C: ${meal.carbs}g | F: ${meal.fat}g
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-small btn-danger" onclick="deleteMeal(${data.meals.indexOf(meal)})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateMeasurementDisplay() {
+            const list = document.getElementById('measurementList');
+
+            if (data.measurements.length === 0) {
+                list.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📏</div><p>No measurements recorded yet.</p></div>';
+                return;
+            }
+
+            list.innerHTML = data.measurements.slice().reverse().map((measure, index) => `
+                <div class="item">
+                    <div class="item-content">
+                        <div class="item-title">${measure.date}</div>
+                        <div class="item-subtitle">
+                            Weight: ${measure.weight}lbs | Body Fat: ${measure.bodyFat}% | 
+                            Waist: ${measure.waist}" | Arms: ${measure.arms}" | Thighs: ${measure.thighs}"
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-small btn-danger" onclick="deleteMeasurement(${data.measurements.indexOf(measure)})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateDashboard() {
+            const today = new Date().toISOString().split('T')[0];
+            const todayMeals = data.meals.filter(m => m.date === today);
+            const todayWorkouts = data.workouts.filter(w => w.date === today);
+
+            // Calculate totals
+            const totalCalories = todayMeals.reduce((sum, m) => sum + m.calories, 0);
+            const totalProtein = todayMeals.reduce((sum, m) => sum + m.protein, 0);
+            const caloriesBurned = todayWorkouts.reduce((sum, w) => sum + w.calories, 0);
+
+            document.getElementById('todayCalories').textContent = totalCalories;
+            document.getElementById('todayProtein').textContent = totalProtein + 'g';
+            document.getElementById('todayWorkouts').textContent = todayWorkouts.length;
+            document.getElementById('totalProtein').textContent = totalProtein + 'g';
+            document.getElementById('totalCarbs').textContent = todayMeals.reduce((sum, m) => sum + m.carbs, 0) + 'g';
+            document.getElementById('totalFat').textContent = todayMeals.reduce((sum, m) => sum + m.fat, 0) + 'g';
+
+            // Progress bars
+            const workoutProgress = (todayWorkouts.length / 5) * 100;
+            document.getElementById('workoutProgress').style.width = Math.min(workoutProgress, 100) + '%';
+            document.getElementById('workoutProgress').textContent = Math.round(workoutProgress) + '%';
+
+            const proteinProgress = (totalProtein / 150) * 100;
+            document.getElementById('proteinProgress').style.width = Math.min(proteinProgress, 100) + '%';
+            document.getElementById('proteinProgress').textContent = Math.round(proteinProgress) + '%';
+
+            // Latest measurements
+            if (data.measurements.length > 0) {
+                const latest = data.measurements[data.measurements.length - 1];
+                document.getElementById('bodyFatPercent').textContent = latest.bodyFat + '%';
+                document.getElementById('avgWeight').textContent = latest.weight + ' lbs';
+                document.getElementById('avgBodyFat').textContent = latest.bodyFat + '%';
+            }
+
+            // Total stats
+            document.getElementById('totalWorkouts').textContent = data.workouts.length;
+            document.getElementById('totalCaloriesBurned').textContent = data.workouts.reduce((sum, w) => sum + w.calories, 0);
+        }
+
+        // Set today's date as default
+        document.getElementById('measureDate').valueAsDate = new Date();
+
+        // Initial update
+        updateDashboard();
+    </script>
+</body>
+</html>
