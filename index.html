@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite MBA Program - Your Path to Leadership</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+        }
+
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #333;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        nav {
+            background-color: #333;
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            display: block;
+            color: white;
+            padding: 15px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #667eea;
+        }
+
+        section {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #667eea;
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border-left: 4px solid #667eea;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .feature-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            text-align: center;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .stat-box h3 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .alt-section {
+            background-color: #f5f5f5;
+        }
+
+        .curriculum {
+            background: white;
+        }
+
+        .curriculum-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .curriculum-list li {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: #f8f9fa;
+            border-left: 4px solid #764ba2;
+            border-radius: 5px;
+        }
+
+        .curriculum-list li:before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border-top: 4px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial p {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+
+        .contact-form {
+            max-width: 500px;
+            margin: 40px auto;
+            display: grid;
+            gap: 15px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1em;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 5px rgba(102, 126, 234, 0.3);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav a {
+                padding: 10px;
+            }
+
+            section h2 {
+                font-size: 1.8em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#curriculum">Curriculum</a></li>
+            <li><a href="#admissions">Admissions</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header id="home">
+        <h1>Transform Your Leadership Journey</h1>
+        <p>Master the skills needed to excel in the modern business world</p>
+        <a href="#admissions" class="cta-button">Apply Now</a>
+    </header>
+
+    <section id="about" class="alt-section">
+        <h2>Why Choose Our MBA Program?</h2>
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">🎓</div>
+                <h3>Expert Faculty</h3>
+                <p>Learn from industry leaders with decades of experience in their fields.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🌍</div>
+                <h3>Global Network</h3>
+                <p>Connect with professionals from over 100 countries worldwide.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💼</div>
+                <h3>Career Support</h3>
+                <p>Get personalized career coaching and placement assistance.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <h3>Real-World Projects</h3>
+                <p>Work on case studies and projects from Fortune 500 companies.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⏰</div>
+                <h3>Flexible Formats</h3>
+                <p>Full-time, Part-time, and Online options available.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">🚀</div>
+                <h3>Industry Partnerships</h3>
+                <p>Direct connections with leading companies for internships and jobs.</p>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <h3>95%</h3>
+                <p>Placement Rate</p>
+            </div>
+            <div class="stat-box">
+                <h3>$125K</h3>
+                <p>Average Starting Salary</p>
+            </div>
+            <div class="stat-box">
+                <h3>5000+</h3>
+                <p>Alumni Network</p>
+            </div>
+            <div class="stat-box">
+                <h3>#12</h3>
+                <p>Ranked Nationally</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="curriculum" class="curriculum">
+        <h2>Comprehensive Curriculum</h2>
+        <p style="text-align: center; margin-bottom: 30px;">
+            Our 2-year program combines foundational business knowledge with specialized expertise
+        </p>
+        <ul class="curriculum-list">
+            <li><strong>Year 1:</strong> Accounting, Finance, Economics, Marketing, Operations, and Organizational Behavior</li>
+            <li><strong>Year 2:</strong> Strategic Management, Business Analytics, Entrepreneurship, and Electives in your chosen specialization</li>
+            <li><strong>Specializations:</strong> Finance, Marketing, Operations, Entrepreneurship, International Business, Healthcare Management</li>
+            <li><strong>Capstone Project:</strong> Real-world consulting project with actual business clients</li>
+            <li><strong>Global Immersion:</strong> International business trip and cross-cultural learning experiences</li>
+            <li><strong>Professional Development:</strong> Leadership workshops, executive seminars, and networking events</li>
+        </ul>
+    </section>
+
+    <section id="admissions" class="alt-section">
+        <h2>Admissions Information</h2>
+        <div style="text-align: center; margin-bottom: 40px;">
+            <p style="font-size: 1.1em; margin-bottom: 20px;">
+                We seek passionate individuals committed to making an impact in the business world.
+            </p>
+        </div>
+
+        <div class="features">
+            <div class="feature-card">
+                <h3>Requirements</h3>
+                <ul style="text-align: left;">
+                    <li>Bachelor's degree from an accredited institution</li>
+                    <li>GMAT or GRE scores</li>
+                    <li>Professional work experience (2+ years preferred)</li>
+                    <li>Strong academic record</li>
+                    <li>TOEFL/IELTS (for international students)</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Application Process</h3>
+                <ul style="text-align: left;">
+                    <li>Complete online application</li>
+                    <li>Submit transcripts and test scores</li>
+                    <li>Professional resume and essays</li>
+                    <li>Personal interview</li>
+                    <li>Decision notification within 4 weeks</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Tuition & Financial Aid</h3>
+                <ul style="text-align: left;">
+                    <li>Tuition: $60,000 per year</li>
+                    <li>Scholarships available (50% of students receive aid)</li>
+                    <li>Flexible payment plans</li>
+                    <li>Federal loan eligibility</li>
+                    <li>Merit-based and need-based awards</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-form" id="contact">
+            <h3 style="text-align: center; color: #667eea; margin-bottom: 20px;">Request More Information</h3>
+            <form onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Tell us about your goals..."></textarea>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%; text-align: center;">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="testimonials">
+        <h2>Alumni Success Stories</h2>
+        <div class="testimonials">
+            <div class="testimonial">
+                <p>"The MBA program transformed my career trajectory. Within 6 months of graduation, I was promoted to VP of Operations. The network and skills were invaluable."</p>
+                <p class="testimonial-author">— Sarah Chen, Class of 2021</p>
+            </div>
+            <div class="testimonial">
+                <p>"I launched my startup right after graduation. The entrepreneurship specialization and access to venture capital connections made all the difference."</p>
+                <p class="testimonial-author">— James Rodriguez, Class of 2022</p>
+            </div>
+            <div class="testimonial">
+                <p>"Coming from a non-business background, I was nervous. The program's foundation courses and supportive faculty helped me excel. Best investment I ever made!"</p>
+                <p class="testimonial-author">— Priya Patel, Class of 2020</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Elite MBA Program. All rights reserved.</p>
+        <p>For inquiries: admissions@elitemba.edu | Phone: +1 (555) 123-4567</p>
+    </footer>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            alert(`Thank you, ${name}! We'll be in touch soon with more information about our MBA program.`);
+            event.target.reset();
+        }
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
